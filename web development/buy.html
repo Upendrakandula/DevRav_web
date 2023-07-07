@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Page</title>
+  <style>
+    body {
+      background-color: #aaea21a1;
+    }
+    .cart-container {
+      margin-top: 20px;
+    }
+
+    .cart-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .cart-items {
+      margin-top: 10px;
+    }
+
+    .cart-item {
+      margin-bottom: 5px;
+    }
+
+    .item-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .item-price {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+  </div>
+
+  <div class="search-container">
+  </div>
+
+  <div class="book-container" id="books-container">
+  </div>
+
+  <div class="cart-container">
+    <p class="cart-title">Cart:</p>
+    <div class="cart-items" id="cart-items">
+    </div>
+  </div>
+
+  <script>
+    function displayInitialBooks() {
+      const books = [
+        {
+          title: 'Book 1',
+          price: 5.99
+        },
+        {
+          title: 'Book 2',
+          price: 8.99
+        },
+        {
+          title: 'Book 3',
+          price: 12.99
+        }
+      ];
+
+      const container = document.getElementById('books-container');
+      container.innerHTML = '';
+
+      books.forEach(function(book) {
+        const bookElement = document.createElement('div');
+        bookElement.className = 'book';
+
+        const titleElement = document.createElement('div');
+        titleElement.className = 'book-title';
+        titleElement.textContent = book.title;
+
+        const priceElement = document.createElement('div');
+        priceElement.className = 'item-price';
+        priceElement.textContent = 'Price: $' + book.price;
+
+        const buyLink = document.createElement('a');
+        buyLink.className = 'buy-link';
+        buyLink.href = '#';
+        buyLink.textContent = 'Buy';
+        buyLink.addEventListener('click', function() {
+          addToCart(book.title, book.price);
+        });
+
+        bookElement.appendChild(titleElement);
+        bookElement.appendChild(priceElement);
+        bookElement.appendChild(buyLink);
+
+        container.appendChild(bookElement);
+      });
+    }
+    function addToCart(title, price) {
+      const cartItems = document.getElementById('cart-items');
+
+      const cartItem = document.createElement('div');
+      cartItem.className = 'cart-item';
+
+      const itemTitle = document.createElement('div');
+      itemTitle.className = 'item-title';
+      itemTitle.textContent = title;
+
+      const itemPrice = document.createElement('div');
+      itemPrice.className = 'item-price';
+      itemPrice.textContent = 'Price: $' + price;
+
+      cartItem.appendChild(itemTitle);
+      cartItem.appendChild(itemPrice);
+
+      cartItems.appendChild(cartItem);
+    }
+    displayInitialBooks();
+  </script>
+</body>
+</html>

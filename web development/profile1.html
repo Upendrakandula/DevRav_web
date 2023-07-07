@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Page</title>
+  <style>
+    .profile-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .profile-dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    .profile-dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .profile-dropdown:hover .profile-dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="profile-dropdown">
+      <button class="profile-button">Profile</button>
+      <div class="profile-dropdown-content">
+        <a href="#">Popular Books</a>
+        <a href="#">Books You've Read</a>
+        <a href="#">Quizzes</a>
+        <a href="#">Authors</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-container">
+  </div>
+
+  <script>
+  
+    function displayInitialBooks() {
+    }
+    displayInitialBooks();
+  </script>
+</body>
+</html>

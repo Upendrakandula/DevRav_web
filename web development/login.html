@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Page</title>
+  <style>
+    body {
+        background-color: #4ca5af58;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #f2f2f284;
+    }
+
+    .nav-links {
+      display: flex;
+    }
+
+    .nav-link {
+      margin-right: 5px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+    }
+
+    .search-bar {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .search-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .book-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      flex-direction: row; 
+    }
+
+    .book {
+      width: 200px;
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .book-image {
+      width: 150px;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .book-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .buy-link,
+    .rent-link {
+      padding: 8px 16px;
+      font-size: 14px;
+      background-color: transparent;
+      color: #4CAF50;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: underline;
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    .cart-symbol {
+      width: 16px;
+      height: 16px;
+      margin-left: 5px;
+    }
+
+    .popular-books {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .popular-books-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .popular-books-list {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    .popular-books-item {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .filter-select {
+      padding: 8px 16px;
+      font-size: 14px;
+      background-color: #aaaf4c84;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="nav-links">
+      <a class="nav-link" href="login.html"><img src="\images\kill1.jpg">HOME</a>
+      <a class="nav-link" href="cart.html"><img src="\images\cart1.jpg">CART</a>
+      <a class="nav-link" href="rent1.html"><img src="\images\reading1.png">LIBRARY</a>
+      <a class="nav-link" href="profile.html"><img src="\images\profile1.png">PROFILE</a>
+      <p>Hello, upendra</p>
+    </div>
+  
+    <div class="search-container">
+      <input type="text" class="search-bar" placeholder="Enter your search books">
+      <button class="search-button">Search</button>
+    </div>
+    <div class="filter-bar">
+      <label for="filter-select">Filter by:</label>
+      <select class="filter-select" id="filter-select">
+        <option value="all">All</option>
+        <option value="available">Available</option>
+        <option value="popular">Popular</option>
+        <option value="price">Price</option>
+        <option value="college">Education</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="popular-books">
+    <p class="popular-books-title">Popular Books:</p>
+  </div>
+
+  <div class="book-container" id="books-container"></div>
+  </div>
+
+  <script>
+    function displayInitialBooks() {
+      const books = [
+        {
+          title: 'Book 1',
+          coverId: '123456',
+          price: 10.99,
+          copiesAvailable: 5
+        },
+        {
+          title: 'Book 2',
+          coverId: '789012',
+          price: 12.99,
+          copiesAvailable: 8
+        },
+        {
+          title: 'Book 3',
+          coverId: '345678',
+          price: 9.99,
+          copiesAvailable: 3
+        }
+      ];
+
+      const container = document.getElementById('books-container');
+      container.innerHTML = '';
+
+      books.forEach(function(book) {
+        const title = book.title;
+        const coverId = book.coverId;
+        const price = book.price;
+        const copiesAvailable = book.copiesAvailable;
+
+        const bookElement = document.createElement('div');
+        bookElement.className = 'book';
+
+        const imageElement = document.createElement('img');
+        imageElement.className = 'book-image';
+        imageElement.src = `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`;
+        imageElement.alt = title;
+
+        const titleElement = document.createElement('div');
+        titleElement.className = 'book-title';
+        titleElement.textContent = title;
+
+        const priceElement = document.createElement('div');
+        priceElement.textContent = `Price: $${price}`;
+
+        const copiesElement = document.createElement('div');
+        copiesElement.textContent = `Copies available: ${copiesAvailable}`;
+
+        const buyLink = document.createElement('a');
+        buyLink.className = 'buy-link';
+        buyLink.href = 'buy.html';
+        buyLink.textContent = 'Buy';
+
+        const rentLink = document.createElement('a');
+        rentLink.className = 'rent-link';
+        rentLink.href = 'rent.html';
+        rentLink.textContent = 'Rent';
+
+        const cartSymbol = document.createElement('img');
+        cartSymbol.src = 'path_to_cart_icon.png';
+        cartSymbol.alt = 'watchlist';
+        cartSymbol.className = 'cart-symbol';
+
+        const cartLink = document.createElement('a');
+        cartLink.className = 'cart-link';
+        cartLink.href = 'watchlist.html';
+        cartLink.appendChild(cartSymbol);
+
+        bookElement.appendChild(imageElement);
+bookElement.appendChild(titleElement);
+        bookElement.appendChild(priceElement);
+        bookElement.appendChild(copiesElement);
+        bookElement.appendChild(buyLink);
+        bookElement.appendChild(rentLink);
+        bookElement.appendChild(cartLink);
+
+        container.appendChild(bookElement);
+      });
+    }
+    function fetchBooks(query, containerId) {
+      const apiUrl = `https://openlibrary.org/search.json?q=${query}`;
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', apiUrl, true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          const books = response.docs.slice(0, 3);
+
+          const container = document.getElementById(containerId);
+          container.innerHTML = '';
+
+          books.forEach(function(book) {
+            const title = book.title;
+            const coverId = book.cover_i;
+
+            const bookElement = document.createElement('div');
+            bookElement.className = 'book';
+
+            const imageElement = document.createElement('img');
+            imageElement.className = 'book-image';
+            imageElement.src = `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`;
+            imageElement.alt = title;
+
+            const titleElement = document.createElement('div');
+            titleElement.className = 'book-title';
+            titleElement.textContent = title;
+
+            const priceElement = document.createElement('div');
+            priceElement.textContent = `Price: $${book.price}`;
+
+            const copiesElement = document.createElement('div');
+            copiesElement.textContent = `Copies available: ${book.copiesAvailable}`;
+
+            const buyLink = document.createElement('a');
+            buyLink.className = 'buy-link';
+            buyLink.href = 'buy.html';
+            buyLink.textContent = 'Buy';
+
+            const rentLink = document.createElement('a');
+            rentLink.className = 'rent-link';
+            rentLink.href = 'rent.html';
+            rentLink.textContent = 'Rent';
+
+            const cartSymbol = document.createElement('img');
+            cartSymbol.src = 'path_to_cart_icon.png';
+            cartSymbol.alt = 'Add to Cart';
+            cartSymbol.className = 'cart-symbol';
+
+            const cartLink = document.createElement('a');
+            cartLink.className = 'cart-link';
+            cartLink.href = '#';
+            cartLink.appendChild(cartSymbol);
+
+            bookElement.appendChild(imageElement);
+            bookElement.appendChild(titleElement);
+            bookElement.appendChild(priceElement);
+            bookElement.appendChild(copiesElement);
+            bookElement.appendChild(buyLink);
+            bookElement.appendChild(rentLink);
+            bookElement.appendChild(cartLink);
+
+            container.appendChild(bookElement);
+          });
+        }
+      };
+      xhr.send();
+    }
+    const searchButton = document.querySelector('.search-button');
+    searchButton.addEventListener('click', function() {
+      const searchQuery = document.querySelector('.search-bar').value;
+      fetchBooks(searchQuery, 'books-container');
+    });
+    displayInitialBooks();
+  </script>
+</body>
+</html>

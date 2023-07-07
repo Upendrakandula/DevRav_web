@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Page</title>
+  <style>
+    body {
+      background-color: rgba(35, 114, 133, 0.362);
+    }
+    .watchlist-container {
+      margin-top: 20px;
+    }
+
+    .watchlist-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .watchlist-items {
+      margin-top: 10px;
+    }
+
+    .watchlist-item {
+      margin-bottom: 5px;
+    }
+
+    .item-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+  </div>
+
+  <div class="search-container">
+  </div> 
+
+  <div class="book-container" id="books-container">
+  </div>
+
+  <div class="watchlist-container">
+    <p class="watchlist-title">Watchlist:</p>
+    <div class="watchlist-items" id="watchlist-items">
+    </div>
+  </div>
+
+  <script>
+    function displayInitialBooks() {
+      const books = [
+        {
+          title: 'Book 1'
+        },
+        {
+          title: 'Book 2'
+        },
+        {
+          title: 'Book 3'
+        }
+      ];
+
+      const container = document.getElementById('books-container');
+      container.innerHTML = '';
+
+      books.forEach(function(book) {
+        const bookElement = document.createElement('div');
+        bookElement.className = 'book';
+
+        const titleElement = document.createElement('div');
+        titleElement.className = 'book-title';
+        titleElement.textContent = book.title;
+
+        const addToWatchlistLink = document.createElement('a');
+        addToWatchlistLink.className = 'add-to-watchlist';
+        addToWatchlistLink.href = '#';
+        addToWatchlistLink.textContent = 'Add to Watchlist';
+        addToWatchlistLink.addEventListener('click', function() {
+          addToWatchlist(book.title);
+        });
+
+        bookElement.appendChild(titleElement);
+        bookElement.appendChild(addToWatchlistLink);
+
+        container.appendChild(bookElement);
+      });
+    }
+    function addToWatchlist(title) {
+      const watchlistItems = document.getElementById('watchlist-items');
+
+      const watchlistItem = document.createElement('div');
+      watchlistItem.className = 'watchlist-item';
+
+      const itemTitle = document.createElement('div');
+      itemTitle.className = 'item-title';
+      itemTitle.textContent = title;
+
+      watchlistItem.appendChild(itemTitle);
+
+      watchlistItems.appendChild(watchlistItem);
+    }
+    displayInitialBooks();
+  </script>
+</body>
+</html>
